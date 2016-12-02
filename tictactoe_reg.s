@@ -20,7 +20,26 @@ debug_start:
         addi $23, $0, 256   # set test bit to be 1 (test 0-256)
         nop 
         nop
-        j change
+        jal change
+	nop
+	nop
+	nop
+	nop
+	addi $23, $0, 257
+	nop 
+	nop 
+	nop
+	jal change
+	nop
+	nop
+	nop
+	addi $22, $0, 1999
+	nop
+	nop
+	nop
+	nop
+	
+	addi $23, $0, 2
         addi $22, $0, 1999  # Should not be reached
 
 
@@ -192,8 +211,9 @@ change_end:
         j check_game_over
 
 check_game_over: 
-        j start
-        
+        #j start
+	jr $31        
+
 debug_exit:
         addi $2, $0, 10     # Set $v0 to 10 for exit syscall
         syscall             # Exit
