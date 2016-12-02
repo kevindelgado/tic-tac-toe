@@ -31,22 +31,23 @@ loop_start:
         j start             # Else spin
 
 change:
+	add $24, $23, 0	    # Save stage of reg23 in case it changes again
         addi $3, $0, 1      # Set temp reg $3 with mask of 1
         and $17, $7, $3     # Set xo reg ($17) to be 0 or 1 based on turn
                             
                             # Store to $8 0 if empty, 1 if x, 2 if o
                             
-                            # Store to $8 the value at $23[0] 
-                            # by ANDing $23 with mask of 1 followed by sra 0 
+                            # Store to $8 the value at $24[0] 
+                            # by ANDing $24 with mask of 1 followed by sra 0 
 
 change_8:                            
         addi $3, $0, 1      # Set temp reg $3 with mask of 1
         
-        and $4, $23, $3     # Populate temp $4[0] with 0-bit of switch_map 
+        and $4, $24, $3     # Populate temp $4[0] with 0-bit of switch_map 
         sra $5, $4, 0       # Set temp $5 with 0-bit of switch_map
         
         and $4, $6, $3      # Populate temp $4[0] with 0-bit of prev_switch_map
-        sra $18, $4, 0      # Set temp $23 with 0-bit of prev_switch_map
+        sra $18, $4, 0      # Set temp $24 with 0-bit of prev_switch_map
         
         bne $5, $18 set_8   # Go to set_8 if 0-bit is the changed bit
         j change_9          # Else go to change_9
@@ -58,11 +59,11 @@ set_8:
 change_9:                            
         addi $3, $0, 2      # Set temp reg $3 with mask of 2
         
-        and $4, $23, $3     # Populate temp $4[1] with 1-bit of switch_map 
+        and $4, $24, $3     # Populate temp $4[1] with 1-bit of switch_map 
         sra $5, $4, 1       # Set temp $5 with 1-bit of switch_map
         
         and $4, $6, $3      # Populate temp $4[1] with 1-bit of prev_switch_map
-        sra $18, $4, 1      # Set temp $23 with 1-bit of prev_switch_map
+        sra $18, $4, 1      # Set temp $24 with 1-bit of prev_switch_map
         
         bne $5, $18 set_9   # Go to set_9 if 1-bit is the changed bit
         j change_10         # Else go to change_10
@@ -74,11 +75,11 @@ set_9:
 change_10:                            
         addi $3, $0, 4      # Set temp reg $3 with mask of 4
         
-        and $4, $23, $3     # Populate temp $4[2] with 2-bit of switch_map 
+        and $4, $24, $3     # Populate temp $4[2] with 2-bit of switch_map 
         sra $5, $4, 2       # Set temp $5 with 2-bit of switch_map
         
         and $4, $6, $3      # Populate temp $4[2] with 2-bit of prev_switch_map
-        sra $18, $4, 2      # Set temp $23 with 2-bit of prev_switch_map
+        sra $18, $4, 2      # Set temp $24 with 2-bit of prev_switch_map
         
         bne $5, $18 set_10  # Go to set_10 if 2-bit is the changed bit
         j change_11         # Else go to change_11
@@ -90,7 +91,7 @@ set_10:
 change_11:                            
         addi $3, $0, 8 
         
-        and $4, $23, $3
+        and $4, $24, $3
         sra $5, $4, 3 
         
         and $4, $6, $3
@@ -106,7 +107,7 @@ set_11:
 change_12:                            
         addi $3, $0, 16
         
-        and $4, $23, $3
+        and $4, $24, $3
         sra $5, $4, 4 
         
         and $4, $6, $3
@@ -122,7 +123,7 @@ set_12:
 change_13:                            
         addi $3, $0, 32
         
-        and $4, $23, $3
+        and $4, $24, $3
         sra $5, $4, 5 
         
         and $4, $6, $3
@@ -138,7 +139,7 @@ set_13:
 change_14:                            
         addi $3, $0, 64
         
-        and $4, $23, $3
+        and $4, $24, $3
         sra $5, $4, 6 
         
         and $4, $6, $3
@@ -154,7 +155,7 @@ set_14:
 change_15:                            
         addi $3, $0, 128
         
-        and $4, $23, $3
+        and $4, $24, $3
         sra $5, $4, 7
         
         and $4, $6, $3
@@ -170,7 +171,7 @@ set_15:
 change_16:                            
         addi $3, $0, 256
         
-        and $4, $23, $3
+        and $4, $24, $3
         sra $5, $4, 8 
         
         and $4, $6, $3
@@ -186,7 +187,7 @@ set_16:
 
 change_end:
         addi $7, $7, 1      # Increment turn counter
-        add $6, $23, 0      # Set prev_switch_map = switch_map 
+        add $6, $24, 0      # Set prev_switch_map = switch_map 
         j check_game_over
 
 check_game_over: 
