@@ -37,8 +37,8 @@ debug_start:
 	sw $8, 32($2)       # switch 8 flipped	
 	jal setup_loop
 
-	sw $8, 36($2)      # switch 9 flipped (reset)
-	jal setup_loop
+	#sw $8, 36($2)      # switch 9 flipped (reset)
+	#jal setup_loop
 
 	sw $8, 4($2)        # switch 1 flipped	
 	jal setup_loop
@@ -102,6 +102,69 @@ turn_made:
 	jr $3		   # No tie, no win, 2p
 
 check_win:
+	addi $6, $31, 0
+	addi $14, $2, 104
+	
+	addi $8, $14, 0	   # Set init
+	addi $9, $0, 4     # Set diff
+	jal win_helper
+
+	addi $8, $14, 12	   # Set init
+	addi $9, $0, 4     # Set diff
+	jal win_helper
+
+	addi $8, $14, 24	   # Set init
+	addi $9, $0, 4     # Set diff
+	jal win_helper
+		
+	addi $8, $14, 0	   # Set init
+	addi $9, $0, 12     # Set diff
+	jal win_helper
+	
+	addi $8, $14, 4	   # Set init
+	addi $9, $0, 12     # Set diff
+	jal win_helper
+
+	addi $8, $14, 8	   # Set init
+	addi $9, $0, 12     # Set diff
+	jal win_helper
+
+	addi $8, $14, 0	   # Set init
+	addi $9, $0, 16     # Set diff
+	jal win_helper
+
+	addi $8, $14, 8	   # Set init
+	addi $9, $0, 8     # Set diff
+	jal win_helper
+	
+	addi $31, $6, 0
+	jr $31
+
+win_helper:
+	lw $10, 0($8)
+	add $8, $8, $9
+	lw $11 0($8)
+	add $8, $8, $9
+	lw $12, 0($8)
+	
+	and $10, $10, $11
+	and $10, $10, $12
+	addi $13, $10, 0
+	
+	jr $31
+	
+
+
+
+
+			   # Check 0, 1, 2
+			   # Check 3, 4, 5
+			   # Check 6, 7, 8
+			   # Check 0, 3, 6
+			   # Check 1, 4, 7
+			   # Check 2, 6, 8
+			   # Check 0, 4, 8
+			   # Check 2, 4, 6
 	jr $31		   # TODO: check if 3 in a row
 
 ai_mov:
