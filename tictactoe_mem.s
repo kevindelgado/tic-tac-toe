@@ -3,199 +3,176 @@
        	.globl main
 
 main: 
-        add $7, $0, $0      # Initialize $7 as global turn counter
-        add $6, $23, $0     # Initialize $6 as the prev_switch_map
-        addi $19, $0, 1     # Set imm to 0 when not debugging 
+        addi $7, $0, 0      # Initialize $7 as global turn counter
+        addi $6, $23, 0     # Initialize $6 as the prev_switch_map
+        addi $19, $0, 0     # Set imm to 1 when not debugging 
+	addi $5, $0, 0	    # Initalize game to 2p
+	addi $8, $0, 1	    # Store 1 in temp to get swaure
+	addi $9, $0, 2	    # Store 2 in temp
+	addi $10, $0, 3
+	addi $11, $0, 4
+	addi $12, $0, 9	    # Store number of board spots in temp
+	addi $13, $0, 0
+	
+	#lw $16, 0($0)	    # Add switch_0 loc to store reg 
+	#lw $17, 0($8)      # Add square_0 loc to store reg
+	#lw $18, 0($11)     # Add prev_switch_0 loc to store reg
+	addi $14, $0, 8
+	addi $25, $0, 0     # for debug purposes
         
 start: 
-        bne $0, $19, debug_start
-        j loop_start
+        bne $0, $19, setup_loop
+
+	blt $0, $25, do_jr
+	addi $25, $25, 1    # Not first time anymore
+	j debug_start
+
+do_jr: 
+	jr $31
         
 debug_start:
-        bne $23, $0 debug_exit
-        nop
-        nop
-        nop
-        nop
-        addi $23, $0, 256   # set test bit to be 1 (test 0-256)
+	#addi $5, $0, 0x10010000
+	li $4, 256	    # Ask for 128 bytes (32 words)
+	li $2, 9            # Sbrk syscall v0
+	syscall             # Result is in $2
+	sw $8, 0($2)        # switch 0 flipped
         nop 
         nop
+	nop
+	nop
+	nop
+	jal setup_loop
+        nop 
+        nop
+	nop
+	nop
+	nop
+	sw $8, 16($2)       # switch 5 flipped
+        nop 
+        nop
+	nop
+	nop
+	nop
+	jal setup_loop
+        nop 
+        nop
+	nop
+	nop
+	nop
+	sw $8, 32($2)       # switch 8 flipped
+        nop 
+        nop
+	nop
+	nop
+	nop
+	
+	jal setup_loop
+        nop 
+        nop
+	nop
+	nop
+	nop
+	sw $8, 36($2)      # switch 9 flipped (reset)
+        nop 
+        nop
+	nop
+	nop
+	nop
+	jal setup_loop
+        nop 
+        nop
+	nop
+	nop
+	nop
+	j debug_exit	
+	
+	
+	
+	
         j change
         addi $22, $0, 1999  # Should not be reached
 
+        
+setup_loop: 
+	addi $5, $31, 0    # Save return reg
+	addi $13, $2, 0    # Reset current switch to sw0
+	addi $11, $2, 52   # Reset prev_swith to sw0
+	addi $14, $13, 33
 
-loop_start:                       
-                            # Alternate solution to below is to subtract 26 from 6 
-                            # and decode the diff into a return reg that tell change
-                            # which switch has been flipped.
-                            
-        bne $23, $6, change # Go to change_loop if $23 has changed
-        j start             # Else spin
+loop:
+	lw $16, 0($13)	   # Load current switch to $16 
+	lw $18, 0($11)     # Load current prev_switch to $18
+	bne $16, $18, chg  # Branch to change if they are diff
+	addi $13, $13, 4   # Increment current switch
+	addi $11, $11, 4   # Increment current prev_switch
+        blt $14, $13, rchk # Branch to reset_check if last switch
+			   # Make $14 temp
+	j loop
 
-change:
-        addi $3, $0, 1      # Set temp reg $3 with mask of 1
-        and $17, $7, $3     # Set xo reg ($17) to be 0 or 1 based on turn
-                            
-                            # Store to $8 0 if empty, 1 if x, 2 if o
-                            
-                            # Store to $8 the value at $23[0] 
-                            # by ANDing $23 with mask of 1 followed by sra 0 
+chg: 
+	blt $16, $18, bad_input
+	and $20, $7, $8    # 20 should be 0 if x, 1 if o
+	addi $21, $20, 1   # Value to be added to square
+	addi $22 $13, 104  # Set $22 to address of square
+	sw $21, 0($22)     # Set square
+	jal turn_made
+	sw $16, 0($11)	   # Set prev_switch = switch
+	jr $5		   # Game not over, keep going
 
-change_8:                            
-        addi $3, $0, 1      # Set temp reg $3 with mask of 1
-        
-        and $4, $23, $3     # Populate temp $4[0] with 0-bit of switch_map 
-        sra $5, $4, 0       # Set temp $5 with 0-bit of switch_map
-        
-        and $4, $6, $3      # Populate temp $4[0] with 0-bit of prev_switch_map
-        sra $18, $4, 0      # Set temp $23 with 0-bit of prev_switch_map
-        
-        bne $5, $18 set_8   # Go to set_8 if 0-bit is the changed bit
-        j change_9          # Else go to change_9
+turn_made:
+	addi $3, $31, 0    # TODO: clean up
+	jal check_win      # Check if 3 in a row anywhere
+	addi $7, $7, 1     # Increment turn from user input
+	blt $14, $7, tie   # Branch if game is tie
+			   # TODO: Make $14 temp
+	#blt $0, $5, ai_mov # AI's turn + inc turn for ai
+	jr $3		   # No tie, no win, 2p
 
-set_8:
-        addi, $8, $17, 1    # Set $8 to 1 if x or 2 if o
-        j change_end
-        
-change_9:                            
-        addi $3, $0, 2      # Set temp reg $3 with mask of 2
-        
-        and $4, $23, $3     # Populate temp $4[1] with 1-bit of switch_map 
-        sra $5, $4, 1       # Set temp $5 with 1-bit of switch_map
-        
-        and $4, $6, $3      # Populate temp $4[1] with 1-bit of prev_switch_map
-        sra $18, $4, 1      # Set temp $23 with 1-bit of prev_switch_map
-        
-        bne $5, $18 set_9   # Go to set_9 if 1-bit is the changed bit
-        j change_10         # Else go to change_10
+check_win:
+	jr $31		   # TODO: check if 3 in a row
 
-set_9:
-        addi, $9, $17, 1    # Set $9 to 1 if x or 2 if o
-        j change_end
+ai_mov:
+	jr $31             # TODO: AI (Don't forget to inc turn)
+tie:
+	addi $5, $0, 3
+	 	          
 
-change_10:                            
-        addi $3, $0, 4      # Set temp reg $3 with mask of 4
-        
-        and $4, $23, $3     # Populate temp $4[2] with 2-bit of switch_map 
-        sra $5, $4, 2       # Set temp $5 with 2-bit of switch_map
-        
-        and $4, $6, $3      # Populate temp $4[2] with 2-bit of prev_switch_map
-        sra $18, $4, 2      # Set temp $23 with 2-bit of prev_switch_map
-        
-        bne $5, $18 set_10  # Go to set_10 if 2-bit is the changed bit
-        j change_11         # Else go to change_11
+bad_input: 
+	j start
 
-set_10:
-        addi, $10, $17, 1   # Set $10 to 1 if x or 2 if o
-        j change_end
+rchk: 
+	lw $16, 0($13)
+	lw $18, 0($11)
+	bne $16, $18, rset
+	j start
 
-change_11:                            
-        addi $3, $0, 8 
-        
-        and $4, $23, $3
-        sra $5, $4, 3 
-        
-        and $4, $6, $3
-        sra $18, $4, 3
-        
-        bne $5, $18 set_11
-        j change_12      
+rset: 
+	addi $7, $0, 0    # Reset turn counter
+	#sw $0, 0($10)     # Reset game_over
+	sw $16, 0($11)    # Set prev_switch = switch
+	addi $19, $2, 104   # save squre_0 loc
+	addi $14, $0, 8
+	addi $13, $0, 0
 
-set_11:
-        addi, $11, $17, 1
-        j change_end
+rset_loop:
+	addi $14, $2, 137
+	sw $0, 0($19)     # Store 0 to square loc
+	addi $19, $19, 4  # Increment square
+	#addi $13, $13, 1   # increment loop counter
+	blt $14, $19 start
+	j rset_loop
 
-change_12:                            
-        addi $3, $0, 16
-        
-        and $4, $23, $3
-        sra $5, $4, 4 
-        
-        and $4, $6, $3
-        sra $18, $4, 4
-        
-        bne $5, $18 set_12 
-        j change_13      
+	
+	
+	
 
-set_12:
-        addi, $12, $17, 1 
-        j change_end
-
-change_13:                            
-        addi $3, $0, 32
-        
-        and $4, $23, $3
-        sra $5, $4, 5 
-        
-        and $4, $6, $3
-        sra $18, $4, 5
-        
-        bne $5, $18 set_13 
-        j change_14      
-
-set_13:
-        addi, $13, $17, 1 
-        j change_end
-
-change_14:                            
-        addi $3, $0, 64
-        
-        and $4, $23, $3
-        sra $5, $4, 6 
-        
-        and $4, $6, $3
-        sra $18, $4, 6
-        
-        bne $5, $18 set_14 
-        j change_15      
-
-set_14:
-        addi, $14, $17, 1 
-        j change_end
-
-change_15:                            
-        addi $3, $0, 128
-        
-        and $4, $23, $3
-        sra $5, $4, 7
-        
-        and $4, $6, $3
-        sra $18, $4, 7
-        
-        bne $5, $18 set_15 
-        j change_16      
-
-set_15:
-        addi, $15, $17, 1 
-        j change_end
-
-change_16:                            
-        addi $3, $0, 256
-        
-        and $4, $23, $3
-        sra $5, $4, 8 
-        
-        and $4, $6, $3
-        sra $18, $4, 8
-        
-        bne $5, $18 set_16 
-        j change_end      
-
-set_16:
-        addi, $16, $17, 1 
-        j change_end
-
-
-change_end:
-        addi $7, $7, 1      # Increment turn counter
-        add $6, $23, 0      # Set prev_switch_map = switch_map 
-        j check_game_over
-
-check_game_over: 
-        j start
-        
+	
 debug_exit:
-        addi $2, $0, 10     # Set $v0 to 10 for exit syscall
+        addi $4, $0, 10     # Set $v0 to 10 for exit syscall
         syscall             # Exit
 
-        
+.data
+	switch_0: .word 0x00000000
+	square_0: .word 0x00000010
+	game_over: .word 0x00000020
+	prev_switch_0: .word 0x00000040

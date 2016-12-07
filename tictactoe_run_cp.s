@@ -1,9 +1,11 @@
         .text
+        .align 2
+       	.globl main
 
 main: 
         add $7, $0, $0      # Initialize $7 as global turn counter
         add $6, $23, $0     # Initialize $6 as the prev_switch_map
-        addi $19, $0, 0     # Set imm to 0 when not debugging 
+        addi $19, $0, 1     # Set imm to 0 when not debugging 
         
 start: 
         bne $0, $19, debug_start
@@ -31,7 +33,7 @@ loop_start:
         j start             # Else spin
 
 change:
-	addi $24, $23, 0	    # Save stage of reg23 in case it changes again
+	add $24, $23, 0	    # Save stage of reg23 in case it changes again
         addi $3, $0, 1      # Set temp reg $3 with mask of 1
         and $17, $7, $3     # Set xo reg ($17) to be 0 or 1 based on turn
                             
@@ -187,7 +189,7 @@ set_16:
 
 change_end:
         addi $7, $7, 1      # Increment turn counter
-        addi $6, $24, 0      # Set prev_switch_map = switch_map 
+        add $6, $24, 0      # Set prev_switch_map = switch_map 
         j check_game_over
 
 check_game_over: 
@@ -195,5 +197,6 @@ check_game_over:
         
 debug_exit:
         addi $2, $0, 10     # Set $v0 to 10 for exit syscall
+        syscall             # Exit
 
         
