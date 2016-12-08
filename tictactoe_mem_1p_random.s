@@ -688,7 +688,7 @@ rchk:
 	nop
 	nop
 	nop
-	bne $16, $17, rset_2p
+	bne $16, $17, rset_1p_rand
 	nop
 	nop
 	nop
