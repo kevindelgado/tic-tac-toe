@@ -163,6 +163,19 @@ chg:
 	and $8, $7, $8     # 8 should be 0 if x, 1 if o
 	addi $8, $8, 1     # Value to be added to square
 	addi $9 $20, 26    # Set $9 to address of square
+
+	nop
+	nop
+	nop
+	nop
+	nop
+	lw $10, 0($9)
+	nop
+	nop
+	nop
+	nop
+	nop
+	bne $10, $0, turn_return
 	nop
 	nop
 	nop
