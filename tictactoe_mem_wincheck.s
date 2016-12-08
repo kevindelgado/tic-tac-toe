@@ -289,165 +289,6 @@ check_win:
 	nop
 	nop
 	nop
-        jal win_helper
-	nop
-	nop
-	nop
-	nop
-	nop
-
-second_turn:
-	nop
-	nop
-	nop
-	nop
-	nop
-       	addi $8, $14, 0    # Set init
-	nop
-	nop
-	nop
-	nop
-	nop
-        addi $9, $0, 1     # Set diff
-	nop
-	nop
-	nop
-	nop
-	nop
-        j win_helper_2
-	nop
-	nop
-	nop
-	nop
-	nop
-
-        addi $8, $14, 6           # Set init
-	nop
-	nop
-	nop
-	nop
-	nop
-        addi $9, $0, 1     # Set diff
-	nop
-	nop
-	nop
-	nop
-	nop
-        jal win_helper
-	nop
-	nop
-	nop
-	nop
-	nop
-
-        addi $8, $14, 0    # Set init
-	nop
-	nop
-	nop
-	nop
-	nop
-        addi $9, $0, 3     # Set diff
-	nop
-	nop
-	nop
-	nop
-	nop
-        jal win_helper
-	nop
-	nop
-	nop
-	nop
-	nop
-
-        addi $8, $14, 1    # Set init
-	nop
-	nop
-	nop
-	nop
-	nop
-        addi $9, $0, 3     # Set diff
-	nop
-	nop
-	nop
-	nop
-	nop
-        jal win_helper
-	nop
-	nop
-	nop
-	nop
-	nop
-
-        addi $8, $14, 2    # Set init
-	nop
-	nop
-	nop
-	nop
-	nop
-        addi $9, $0, 3     # Set diff
-	nop
-	nop
-	nop
-	nop
-	nop
-        jal win_helper
-	nop
-	nop
-	nop
-	nop
-	nop
-
-        addi $8, $14, 0    # Set init
-	nop
-	nop
-	nop
-	nop
-	nop
-        addi $9, $0, 4     # Set diff
-	nop
-	nop
-	nop
-	nop
-	nop
-        jal win_helper
-	nop
-	nop
-	nop
-	nop
-	nop
-
-        addi $8, $14, 2    # Set init
-	nop
-	nop
-	nop
-	nop
-	nop
-        addi $9, $0, 2     # Set diff
-	nop
-	nop
-	nop
-	nop
-	nop
-        jal win_helper
-	nop
-	nop
-	nop
-	nop
-	nop
-
-        j win_return
-	nop
-	nop
-	nop
-	nop
-	nop
-
-win_helper:
-	nop
-	nop
-	nop
-	nop
-	nop
         lw $10, 0($8)
 	nop
 	nop
@@ -536,14 +377,21 @@ win_valid:
 	nop
 	nop
 	nop
-	j second_turn
-	nop
-	nop
-	nop
-	nop
-	nop
 
-win_helper_2:
+second_turn:
+	nop
+	nop
+	nop
+	nop
+	nop
+       	addi $8, $14, 0    # Set init
+	nop
+	nop
+	nop
+	nop
+	nop
+        addi $9, $0, 1     # Set diff
+	nop
 	nop
 	nop
 	nop
