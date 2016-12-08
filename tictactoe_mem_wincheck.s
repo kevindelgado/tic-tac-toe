@@ -153,7 +153,7 @@ chg:
 	nop
 	nop
 	nop
-	#blt $16, $17, bad_input
+	blt $16, $17, start
 	nop
 	nop
 	nop
@@ -218,7 +218,7 @@ turn_made:
 	nop
 	nop
 	nop
-	j check_win
+	#j check_win
 	nop
 	nop
 	nop
