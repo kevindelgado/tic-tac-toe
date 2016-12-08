@@ -213,20 +213,17 @@ turn_made:
 	nop
 	nop
 	nop
-	addi $14, $0, 7    # OFF BY ONE LOOK HERE
-	addi $3, $31, 0    # TODO: clean up
+	addi $14, $0, 8    # OFF BY ONE LOOK HERE
 	nop
 	nop
 	nop
 	nop
 	nop
-	#jal check_win      # Check if 3 in a row anywhere
 	nop
 	nop
 	nop
 	nop
 	nop
-	#addi $7, $7, 1     # Increment turn from user input
 	nop
 	nop
 	nop
@@ -239,13 +236,11 @@ turn_made:
 	nop
 	nop
 			   # TODO: Make $14 temp
-	#blt $0, $5, ai_mov # AI's turn + inc turn for ai
 	nop
 	nop
 	nop
 	nop
 	nop
-	#jr $3		   # No tie, no win, 2p
 	j turn_return
 	nop
 	nop
