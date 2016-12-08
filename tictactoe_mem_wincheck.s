@@ -225,12 +225,6 @@ turn_made:
 	nop
 	nop
 	nop
-	addi $14, $0, 8    # OFF BY ONE LOOK HERE
-	nop
-	nop
-	nop
-	nop
-	nop
 	j check_win
 	nop
 	nop
@@ -239,6 +233,12 @@ turn_made:
 	nop
 
 win_return:
+	nop
+	nop
+	nop
+	nop
+	nop
+	addi $14, $0, 8    # OFF BY ONE LOOK HERE
 	nop
 	nop
 	nop
