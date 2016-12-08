@@ -518,6 +518,11 @@ win_helper:
 	nop
 
 win_valid:
+	nop	
+	nop
+	nop
+	nop	
+	nop
 	sw $13, 35($2)
 	nop
 	nop
