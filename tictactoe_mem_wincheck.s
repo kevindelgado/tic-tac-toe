@@ -415,7 +415,7 @@ check_win:
 	nop
 	nop
 
-        j win return
+        j win_return
 	nop
 	nop
 	nop
