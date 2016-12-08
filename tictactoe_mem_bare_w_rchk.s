@@ -127,7 +127,7 @@ loop:
 	nop
 	nop
 
-	blt $18, $15, rchk
+	blt $18, $15, setup_loop
 	nop
 	nop
 	nop
