@@ -265,10 +265,11 @@ rand_loop:
 	lw $10, 0($9)
 	bne $10, $0 filled_square
 	sw $11, 0($9)
+	addi $7, $7, 1
 	j check_win
 
 filled_square:
-	addi $9, $0, 1
+	addi $9, $9, 1
 	j rand_loop	    # Infinite loop will occur at end
 	
 
