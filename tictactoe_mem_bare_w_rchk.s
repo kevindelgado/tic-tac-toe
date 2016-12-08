@@ -22,7 +22,17 @@ main:
 	addi $25, $0, 0     # for debug purposes
         
 start: 
+	nop
+	nop
+	nop
+	nop
+	nop
 	lw $2, 0($0)        # Commen this out when debugging
+	nop
+	nop
+	nop
+	nop
+	nop
         bne $0, $19, setup_loop
 	nop
 	nop
@@ -33,12 +43,47 @@ start:
 
         
 setup_loop: 
+	nop
+	nop
+	nop
+	nop
+	nop
 	addi $5, $31, 0    # Save return reg
+	nop
+	nop
+	nop
+	nop
+	nop
 	addi $20, $2, 0    # Reset current switch to sw0
+	nop
+	nop
+	nop
+	nop
+	nop
 	addi $21, $2, 13   # Reset prev_swith to sw0
+	nop
+	nop
+	nop
+	nop
+	nop
 	addi $14, $20, 9
+	nop
+	nop
+	nop
+	nop
+	nop
 	addi $15, $0, 0    # Reset counter
+	nop
+	nop
+	nop
+	nop
+	nop
 	addi $18, $0, 8
+	nop
+	nop
+	nop
+	nop
+	nop
 loop:
 	nop
 	nop
@@ -46,6 +91,11 @@ loop:
 	nop
 	nop
 	lw $16, 0($20)	   # Load current switch to $16 
+	nop
+	nop
+	nop
+	nop
+	nop
 	lw $17, 0($21)     # Load current prev_switch to $17
 	nop
 	nop
@@ -59,6 +109,11 @@ loop:
 	nop
 	nop
 	addi $20, $20, 1   # Increment current switch
+	nop
+	nop
+	nop
+	nop
+	nop
 	addi $21, $21, 1   # Increment current prev_switch
 	nop
 	nop
@@ -72,7 +127,6 @@ loop:
 	nop
 	nop
 
-	#blt $18, $15, setup_loop # Reached switch 8, start over at 0
 	blt $18, $15, rchk
 	nop
 	nop
@@ -98,8 +152,23 @@ chg:
 	nop
 	nop
 	addi $8, $0, 1
+	nop
+	nop
+	nop
+	nop
+	nop
 	and $8, $7, $8     # 8 should be 0 if x, 1 if o
+	nop
+	nop
+	nop
+	nop
+	nop
 	addi $8, $8, 1     # Value to be added to square
+	nop
+	nop
+	nop
+	nop
+	nop
 	addi $9 $20, 26    # Set $9 to address of square
 	nop
 	nop
@@ -156,6 +225,11 @@ rchk:
 	nop
 	nop
 	j setup_loop
+	nop
+	nop
+	nop
+	nop
+	nop
 
 	
 
