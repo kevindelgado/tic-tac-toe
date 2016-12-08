@@ -153,7 +153,7 @@ chg:
 	nop
 	nop
 	nop
-	blt $16, $17, start
+	blt $16, $17, turn_return
 	nop
 	nop
 	nop
