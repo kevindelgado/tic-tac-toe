@@ -276,7 +276,8 @@ check_win:
 	nop
 	nop
 
-        addi $8, $14, 0    # Set init
+
+        addi $8, $14, 3           # Set init
 	nop
 	nop
 	nop
@@ -295,7 +296,7 @@ check_win:
 	nop
 	nop
 
-        addi $8, $14, 3           # Set init
+       	addi $8, $14, 0    # Set init
 	nop
 	nop
 	nop
