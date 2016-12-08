@@ -20,9 +20,11 @@ main:
 	
 	addi $14, $0, 8
 	addi $25, $0, 0     # for debug purposes
+	addi $6, $0, 0      # Random counter
         
 start: 
 	lw $2, 0($0)        # Commen this out when debugging
+	jal inc_counter
         bne $0, $19, setup_loop
 	nop
 	nop
@@ -43,6 +45,17 @@ start:
 	nop
 	nop
 	nop
+
+inc_counter:
+	addi $8, $0, 23
+	blt $6, $8, continue_count
+	addi $6, $0, 0
+	jr $31
+
+continue_count:
+	addi $6, $6, 1
+	jr $31
+ 
 
 do_jr: 
 	jr $31
@@ -225,12 +238,39 @@ turn_made:
 	nop
 	nop
 	nop
+	bne $24, $0, add_rand
+	nop
+	nop
+	nop
+	nop
+	nop
 	j check_win
 	nop
 	nop
 	nop
 	nop
 	nop
+
+add_rand:
+	nop 
+	nop
+	nop
+	nop
+	nop
+
+	addi $8, $6, $0
+	addi $9, $2, 26     # sq0 loc
+	addi $11, $0, 2     # Always o for cpu
+rand_loop:
+	lw $10, 0($9)
+	bne $10, $0 filled_square
+	sw $11, 0($9)
+	j check_win
+
+filled_square
+	addi $9, $0, 1
+	j rand_loop	    # Infinite loop will occur at end
+	
 
 win_return:
 	nop
@@ -662,7 +702,46 @@ rchk:
 	nop
 	nop
 
-rset_2p: 
+rset_2p:
+	nop
+	nop
+	nop
+	nop
+	nop
+	addi $24, $0, 0
+	nop
+	nop
+	nop
+	nop
+	nop
+	j rset
+	nop
+	nop
+	nop
+	nop
+	nop
+
+rset_1p_rand:
+	nop
+	nop
+	nop
+	nop
+	nop
+	addi $24, $0, 1
+	nop
+	nop
+	nop
+	nop
+	nop
+	j rset
+	nop
+	nop
+	nop
+	nop
+	nop
+
+
+rset: 
 	nop
 	nop
 	nop
@@ -709,7 +788,6 @@ rset_done:
 	nop
 	nop
 	nop
-	
 	
 	
 
