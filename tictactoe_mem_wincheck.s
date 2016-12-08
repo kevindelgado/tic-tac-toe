@@ -231,7 +231,7 @@ turn_made:
 	nop
 	nop
 	nop
-	#j check_win
+	j check_win
 	nop
 	nop
 	nop
@@ -490,8 +490,41 @@ win_helper:
 	nop
 	nop
 	nop
+	lw $14, 35($2)
+	nop
+	nop
+	nop
+	nop
+	nop
+
+	addi $11, $0, 1
+	nop
+	nop
+	nop
+	nop
+	nop
+	blt $14, $11, win_valid
+	nop
+	nop
+	nop
+	nop
+	nop
 
         jr $31
+	nop
+	nop
+	nop
+	nop
+	nop
+
+win_valid:
+	sw $13, 35($2)
+	nop
+	nop
+	nop
+	nop
+	nop
+	jr $31
 	nop
 	nop
 	nop
