@@ -137,13 +137,13 @@ rchk:
 	nop
 	nop
 	nop
-	lw $16, 0($20)
+	#lw $16, 0($20)
 	nop
 	nop
 	nop
 	nop
 	nop
-	lw $17, 0($21)
+	#lw $17, 0($21)
 	nop
 	nop
 	nop
