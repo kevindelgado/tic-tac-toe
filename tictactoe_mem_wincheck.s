@@ -491,7 +491,7 @@ win_helper:
 	nop
 	nop
 	nop
-	lw $14, 35($2)
+	lw $23, 35($2)
 	nop
 	nop
 	nop
@@ -504,7 +504,7 @@ win_helper:
 	nop
 	nop
 	nop
-	blt $14, $11, win_valid
+	blt $23, $11, win_valid
 	nop
 	nop
 	nop
