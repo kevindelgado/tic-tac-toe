@@ -504,7 +504,7 @@ win_helper:
 	nop
 	nop
 	nop
-	blt $14, $11, win_valid
+	#blt $14, $11, win_valid
 	nop
 	nop
 	nop
