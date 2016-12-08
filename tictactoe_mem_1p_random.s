@@ -727,7 +727,7 @@ rset_1p_rand:
 	nop
 	nop
 	nop
-	addi $24, $0, 0
+	addi $24, $0, 1
 	nop
 	nop
 	nop
