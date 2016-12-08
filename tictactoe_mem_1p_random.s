@@ -258,7 +258,7 @@ add_rand:
 	nop
 	nop
 
-	addi $8, $6, $0
+	addi $8, $6, 0
 	addi $9, $2, 26     # sq0 loc
 	addi $11, $0, 2     # Always o for cpu
 rand_loop:
@@ -267,7 +267,7 @@ rand_loop:
 	sw $11, 0($9)
 	j check_win
 
-filled_square
+filled_square:
 	addi $9, $0, 1
 	j rand_loop	    # Infinite loop will occur at end
 	
@@ -748,7 +748,6 @@ rset:
 	nop
 	nop
 	nop
-	addi $24, $0, 0   # Global game is 2p
 	addi $7, $0, 0    # Reset turn counter
 	sw $16, 0($21)    # Set prev_switch = switch
 	addi $19, $2, 26   # save squre_0 loc
