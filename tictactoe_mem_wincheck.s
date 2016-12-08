@@ -296,6 +296,12 @@ check_win:
 	nop
 	nop
 
+second_turn:
+	nop
+	nop
+	nop
+	nop
+	nop
        	addi $8, $14, 0    # Set init
 	nop
 	nop
@@ -308,7 +314,7 @@ check_win:
 	nop
 	nop
 	nop
-        jal win_helper
+        j win_helper_2
 	nop
 	nop
 	nop
@@ -504,14 +510,14 @@ win_helper:
 	nop
 	nop
 	nop
-	#blt $14, $11, win_valid
+	blt $14, $11, win_valid
 	nop
 	nop
 	nop
 	nop
 	nop
 
-        jr $31
+        j second_turn
 	nop
 	nop
 	nop
@@ -530,7 +536,107 @@ win_valid:
 	nop
 	nop
 	nop
-	jr $31
+	j second_turn
+	nop
+	nop
+	nop
+	nop
+	nop
+
+win_helper_2:
+	nop
+	nop
+	nop
+	nop
+	nop
+        lw $10, 0($8)
+	nop
+	nop
+	nop
+	nop
+	nop
+        add $8, $8, $9
+	nop
+	nop
+	nop
+	nop
+	nop
+        lw $11 0($8)
+	nop
+	nop
+	nop
+	nop
+	nop
+        add $8, $8, $9
+	nop
+	nop
+	nop
+	nop
+	nop
+        lw $12, 0($8)
+	nop
+	nop
+	nop
+	nop
+	nop
+
+        and $10, $10, $11
+	nop
+	nop
+	nop
+	nop
+	nop
+        and $10, $10, $12
+	nop
+	nop
+	nop
+	nop
+	nop
+        addi $13, $10, 0
+	nop
+	nop
+	nop
+	nop
+	nop
+	lw $14, 35($2)
+	nop
+	nop
+	nop
+	nop
+	nop
+
+	addi $11, $0, 1
+	nop
+	nop
+	nop
+	nop
+	nop
+	blt $14, $11, win_valid_2
+	nop
+	nop
+	nop
+	nop
+	nop
+
+        j win_return
+	nop
+	nop
+	nop
+	nop
+
+win_valid_2:
+	nop	
+	nop
+	nop
+	nop	
+	nop
+	sw $13, 35($2)
+	nop
+	nop
+	nop
+	nop
+	nop
+	j win_return
 	nop
 	nop
 	nop
