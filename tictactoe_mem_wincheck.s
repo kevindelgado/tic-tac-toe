@@ -555,6 +555,18 @@ tie:
 	nop
 	nop
 	nop
+	lw $23, 35($2)
+	nop
+	nop
+	nop
+	nop
+	nop
+	bne $23, $0, turn_return
+	nop
+	nop
+	nop
+	nop
+	nop
 	addi $22, $0, 3
 	nop
 	nop
