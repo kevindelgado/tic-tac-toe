@@ -30,68 +30,6 @@ start:
 	nop
 	nop
 
-	blt $0, $25, do_jr
-	nop
-	nop
-	nop
-	nop
-	nop
-	addi $25, $25, 1    # Not first time anymore
-	j debug_start
-	nop
-	nop
-	nop
-	nop
-	nop
-
-do_jr: 
-	jr $31
-	nop
-	nop
-	nop
-	nop
-	nop
-        
-debug_start:
-	addi $8, $0, 1
-	#li $4, 256	    # Ask for 128 bytes (32 words)
-	#li $2, 9            # Sbrk syscall v0
-	#syscall             # Result is in $2
-
-	sw $8, 0($2)        # switch 0 flipped
-	jal setup_loop
-
-	sw $8, 16($2)       # switch 4 flipped
-	jal setup_loop
-
-	sw $8, 32($2)       # switch 8 flipped	
-	jal setup_loop
-
-	sw $8, 36($2)      # switch 9 flipped (reset)
-	jal setup_loop
-
-	sw $8, 4($2)        # switch 1 flipped	
-	jal setup_loop
-	
-	sw $8, 8($2)        # switch 2 flipped	
-	jal setup_loop
-
-	sw $8, 12($2)       # switch 3 flipped	
-	jal setup_loop
-
-	sw $8, 20($2)       # switch 5 flipped	
-	jal setup_loop
-
-	sw $8, 24($2)       # switch 6 flipped	
-	jal setup_loop
-
-	sw $8, 28($2)       # switch 7 flipped	
-	jal setup_loop
-
-	j debug_exit	
-	
-        addi $9, $0, 1999  # Should not be reached
-
         
 setup_loop: 
 	addi $5, $31, 0    # Save return reg
@@ -212,7 +150,8 @@ rchk:
 	nop
 	nop
 	nop
-	bne $16, $17, rset
+	#bne $16, $17, rset
+	bne $16, $17, start
 	nop
 	nop
 	nop
