@@ -199,7 +199,6 @@ turn_return:
 	nop
 	nop
 	nop
-	#jr $5		   # Game not over, keep going
 	j start
 	nop
 	nop
@@ -245,19 +244,6 @@ win_return:
 	nop
 	nop
 	j turn_return
-	nop
-	nop
-	nop
-	nop
-	nop
-
-check_win:
-	nop
-	nop
-	nop
-	nop
-	nop
-	j win_return		   # TODO: check if 3 in a row
 	nop
 	nop
 	nop
