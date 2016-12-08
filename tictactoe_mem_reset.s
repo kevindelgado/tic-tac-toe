@@ -174,6 +174,7 @@ chg:
 	nop
 	nop
 	nop
+	addi $7, $7, 1
 	#jal turn_made
 	nop
 	nop
