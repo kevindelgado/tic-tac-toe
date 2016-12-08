@@ -338,7 +338,7 @@ check_win:
 	nop
 	nop
 	nop
-	lw $14, 35($2)
+	lw $23, 35($2)
 	nop
 	nop
 	nop
@@ -351,7 +351,7 @@ check_win:
 	nop
 	nop
 	nop
-	blt $14, $11, win_valid
+	blt $23, $11, win_valid
 	nop
 	nop
 	nop
@@ -446,7 +446,7 @@ second_turn:
 	nop
 	nop
 	nop
-	lw $14, 35($2)
+	lw $23, 35($2)
 	nop
 	nop
 	nop
@@ -459,7 +459,7 @@ second_turn:
 	nop
 	nop
 	nop
-	blt $14, $11, win_valid_2
+	blt $23, $11, win_valid_2
 	nop
 	nop
 	nop
