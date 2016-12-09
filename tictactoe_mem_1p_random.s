@@ -297,6 +297,19 @@ rand_loop:
 	nop
 	nop
 	nop
+	lw $29, 35($2)
+	nop
+	nop
+	nop
+	nop
+	nop
+
+	or $10, $10, $29
+	nop
+	nop
+	nop
+	nop
+	nop
 	bne $10, $0 filled_square
 	nop
 	nop
