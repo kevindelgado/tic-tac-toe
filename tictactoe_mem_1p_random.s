@@ -303,8 +303,8 @@ rand_loop:
 	nop
 	nop
 	nop
+	bne $29, $0, main
 
-	or $10, $10, $29
 	nop
 	nop
 	nop
