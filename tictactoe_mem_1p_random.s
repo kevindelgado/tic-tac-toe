@@ -274,12 +274,13 @@ filled_square:
 	
 
 win_return:
+	
 	nop
 	nop
 	nop
 	nop
 	nop
-	addi $14, $0, 8    # OFF BY ONE LOOK HERE
+	addi $14, $24, 8    # OFF BY ONE LOOK HERE
 	nop
 	nop
 	nop
