@@ -203,7 +203,7 @@ chg:
 	addi $7, $7, 1
 	nop
 	nop
-	#jal check_tie
+	jal check_tie
 	nop
 	nop
 	nop
@@ -251,7 +251,7 @@ turn_made:
 	nop
 	nop
 	nop
-	jal check_tie
+	#jal check_tie
 	nop
 	nop
 	nop
@@ -310,7 +310,7 @@ rand_loop:
 	nop
 	nop
 	nop
-	jal check_tie
+	#jal check_tie
 	nop
 	nop
 	nop
