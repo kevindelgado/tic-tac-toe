@@ -259,18 +259,116 @@ add_rand:
 	nop
 
 	addi $8, $6, 0
+	nop 
+	nop
+	nop
+	nop
+	nop
 	addi $9, $2, 26     # sq0 loc
+	nop 
+	nop
+	nop
+	nop
+	nop
 	addi $11, $0, 2     # Always o for cpu
+	nop 
+	nop
+	nop
+	nop
+	nop
 rand_loop:
+	nop 
+	nop
+	nop
+	nop
+	nop
 	lw $10, 0($9)
+	nop 
+	nop
+	nop
+	nop
+	nop
 	bne $10, $0 filled_square
+	nop 
+	nop
+	nop
+	nop
+	nop
+	bne $0, $8, dec_ctr
+	nop 
+	nop
+	nop
+	nop
+	nop
 	sw $11, 0($9)
+	nop 
+	nop
+	nop
+	nop
+	nop
 	addi $7, $7, 1
+	nop 
+	nop
+	nop
+	nop
+	nop
 	j check_win
+	nop 
+	nop
+	nop
+	nop
+	nop
+
+dec_ctr:
+	addi $10, $0, 1
+	nop 
+	nop
+	nop
+	nop
+	nop
+	sub $8, $8, $10
+	nop 
+	nop
+	nop
+	nop
+	nop
+	jal inc_9
+	nop 
+	nop
+	nop
+	nop
+	nop
+	j rand_loop
+	nop 
+	nop
+	nop
+	nop
+	nop
 
 filled_square:
-	addi $9, $9, 1
+	jal inc_9
+	nop 
+	nop
+	nop
+	nop
+	nop
 	j rand_loop	    # Infinite loop will occur at end
+	nop 
+	nop
+	nop
+	nop
+	nop
+
+inc_9:
+	$14, $0, 7
+	blt $14, $9, reset_9
+	addi $9, $9, 1
+	jr $31
+
+reset_9:
+	addi $9, $0, 0 
+	jr $31
+		
 	
 
 win_return:
