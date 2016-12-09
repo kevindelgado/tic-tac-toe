@@ -303,6 +303,12 @@ rand_loop:
 	nop
 	nop
 	nop
+	bne $8, $0, dec_8
+	nop 
+	nop
+	nop
+	nop
+	nop
 	sw $11, 0($9)
 	nop
 	nop
@@ -326,13 +332,27 @@ rand_loop:
 	nop
 	nop
 	nop
-	#jal check_tie
-	nop
-	nop
-	nop
-	nop
 	nop
 	j turn_return
+
+dec_8:
+	nop 
+	nop
+	nop
+	nop
+	nop
+	addi $8, $8, -1
+	nop 
+	nop
+	nop
+	nop
+	nop
+	j filled_saure
+	nop 
+	nop
+	nop
+	nop
+	nop
 
 filled_square:
 	nop 
@@ -346,12 +366,31 @@ filled_square:
 	nop
 	nop
 	nop
-	j rand_loop	    # Infinite loop will occur at end
+	addi $25, $0, 9
 	nop 
 	nop
 	nop
 	nop
 	nop
+	blt $9, $25, rand_loop
+	nop 
+	nop
+	nop
+	nop
+	nop
+	addi $9, $9, -9
+	nop 
+	nop
+	nop
+	nop
+	nop
+	j rand_loop
+	nop 
+	nop
+	nop
+	nop
+	nop
+	
 	
 
 check_tie:
