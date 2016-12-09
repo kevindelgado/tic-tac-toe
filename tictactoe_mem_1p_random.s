@@ -172,6 +172,19 @@ chg:
 	nop
 	nop
 	nop
+
+	lw $29, 35($2)
+	nop
+	nop
+	nop
+	nop
+	nop
+	bne $29, $0, turn_return
+	nop
+	nop
+	nop
+	nop
+	nop
 	addi $8, $0, 1
 	and $8, $7, $8     # 8 should be 0 if x, 1 if o
 	addi $8, $8, 1     # Value to be added to square
