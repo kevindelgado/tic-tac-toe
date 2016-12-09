@@ -245,7 +245,8 @@ turn_made:
 	nop
 	nop
 	nop
-	j check_win
+	jal check_win
+	j turn_return
 	nop
 	nop
 	nop
@@ -267,7 +268,8 @@ rand_loop:
 	bne $10, $0 filled_square
 	sw $11, 0($9)
 	addi $7, $7, 1
-	j check_win
+	jal check_win
+	j turn_return
 
 filled_square:
 	addi $9, $9, 1
@@ -298,7 +300,7 @@ check_tie:
 	nop
 	nop
 	nop
-	jal $31
+	jr $31
 	nop
 	nop
 	nop
@@ -317,6 +319,7 @@ check_win:
 	nop
 	nop
 	nop
+	addi $10, $31, 0;
 
 
         addi $8, $14, 3           # Set init
@@ -471,7 +474,7 @@ check_win:
 	nop
 	nop
 
-        j turn_return
+        jr $10
 	nop
 	nop
 	nop
