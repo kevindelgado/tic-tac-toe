@@ -692,7 +692,7 @@ win_valid:
 	nop
 	nop
 	nop
-	j start
+	j loop
 	nop
 	nop
 	nop
