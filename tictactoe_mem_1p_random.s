@@ -692,7 +692,7 @@ win_valid:
 	nop
 	nop
 	nop
-	j loop
+	jr $31
 	nop
 	nop
 	nop
