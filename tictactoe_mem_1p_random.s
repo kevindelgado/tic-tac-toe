@@ -203,7 +203,7 @@ chg:
 	addi $7, $7, 1
 	nop
 	nop
-	jal check_tie
+	#jal check_tie
 	nop
 	nop
 	nop
@@ -246,6 +246,17 @@ turn_made:
 	nop
 	nop
 	jal check_win
+	nop
+	nop
+	nop
+	nop
+	nop
+	jal check_tie
+	nop
+	nop
+	nop
+	nop
+	nop
 	j turn_return
 	nop
 	nop
@@ -265,15 +276,66 @@ add_rand:
 	addi $11, $0, 2     # Always o for cpu
 rand_loop:
 	lw $10, 0($9)
+	nop
+	nop
+	nop
+	nop
+	nop
 	bne $10, $0 filled_square
+	nop
+	nop
+	nop
+	nop
+	nop
 	sw $11, 0($9)
+	nop
+	nop
+	nop
+	nop
+	nop
 	addi $7, $7, 1
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
 	jal check_win
+	nop
+	nop
+	nop
+	nop
+	nop
+	jal check_tie
+	nop
+	nop
+	nop
+	nop
+	nop
 	j turn_return
 
 filled_square:
+	nop 
+	nop
+	nop
+	nop
+	nop
 	addi $9, $9, 1
+	nop 
+	nop
+	nop
+	nop
+	nop
 	j rand_loop	    # Infinite loop will occur at end
+	nop 
+	nop
+	nop
+	nop
+	nop
 	
 
 check_tie:
@@ -319,7 +381,7 @@ check_win:
 	nop
 	nop
 	nop
-	addi $10, $31, 0;
+	addi $10, $31, 0
 
 
         addi $8, $14, 3           # Set init
