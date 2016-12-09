@@ -347,7 +347,7 @@ dec_8:
 	nop
 	nop
 	nop
-	j filled_saure
+	j filled_square
 	nop 
 	nop
 	nop
@@ -366,7 +366,7 @@ filled_square:
 	nop
 	nop
 	nop
-	addi $25, $0, 9
+	addi $25, $2, 35
 	nop 
 	nop
 	nop
