@@ -360,13 +360,13 @@ filled_square:
 	nop
 
 inc_9:
-	$14, $0, 7
+	addi $14, $0, 7
 	blt $14, $9, reset_9
 	addi $9, $9, 1
 	jr $31
 
 reset_9:
-	addi $9, $0, 0 
+	addi $9, $2, 26 
 	jr $31
 		
 	
