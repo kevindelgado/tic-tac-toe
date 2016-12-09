@@ -245,13 +245,20 @@ turn_made:
 	nop
 	nop
 	nop
+	
+        jal check_tie
+	nop
+	nop
+	nop
+	nop
+	nop
 	bne $24, $0, add_rand
 	nop
 	nop
 	nop
 	nop
 	nop
-	j win_return
+	j turn_return
 	nop
 	nop
 	nop
@@ -274,14 +281,14 @@ rand_loop:
 	sw $11, 0($9)
 	addi $7, $7, 1
 	jal check_win
-	j win_return
+	j turn_return
 
 filled_square:
 	addi $9, $9, 1
 	j rand_loop	    # Infinite loop will occur at end
 	
 
-win_return:
+check_tie:
 	nop
 	nop
 	nop
@@ -305,7 +312,7 @@ win_return:
 	nop
 	nop
 	nop
-	j turn_return
+	jr $31
 	nop
 	nop
 	nop
