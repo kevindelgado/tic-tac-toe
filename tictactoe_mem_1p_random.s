@@ -381,7 +381,7 @@ check_win:
 	nop
 	nop
 	nop
-	addi $10, $31, 0
+	addi $30, $31, 0
 
 
         addi $8, $14, 3           # Set init
@@ -536,7 +536,7 @@ check_win:
 	nop
 	nop
 
-        jr $10
+        jr $30
 	nop
 	nop
 	nop
