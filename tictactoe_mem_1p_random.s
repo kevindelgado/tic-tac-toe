@@ -203,6 +203,7 @@ chg:
 	addi $7, $7, 1
 	nop
 	nop
+	jal check_tie
 	nop
 	nop
 	nop
@@ -273,7 +274,7 @@ filled_square:
 	j rand_loop	    # Infinite loop will occur at end
 	
 
-win_return:
+check_tie:
 	nop
 	nop
 	nop
@@ -297,7 +298,7 @@ win_return:
 	nop
 	nop
 	nop
-	j turn_return
+	jal $31
 	nop
 	nop
 	nop
@@ -470,7 +471,7 @@ check_win:
 	nop
 	nop
 
-        j win_return
+        j turn_return
 	nop
 	nop
 	nop
