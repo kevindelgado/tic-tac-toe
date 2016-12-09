@@ -692,7 +692,7 @@ win_valid:
 	nop
 	nop
 	nop
-	jr $31
+	j start
 	nop
 	nop
 	nop
