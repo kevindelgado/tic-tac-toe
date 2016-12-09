@@ -203,7 +203,23 @@ chg:
 	addi $7, $7, 1
 	nop
 	nop
+	nop
+	nop
+	nop
+	jal check_win
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
 	jal check_tie
+	nop
+	nop
+	nop
+	nop
+	nop
 	nop
 	nop
 	nop
