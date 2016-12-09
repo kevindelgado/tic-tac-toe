@@ -47,13 +47,49 @@ start:
 	nop
 
 inc_counter:
+	nop
+	nop
+	nop
+	nop
+	nop
 	addi $8, $0, 23
+	nop
+	nop
+	nop
+	nop
+	nop
+
 	blt $6, $8, continue_count
+	nop
+	nop
+	nop
+	nop
+	nop
 	addi $6, $0, 0
+	nop
+	nop
+	nop
+	nop
+	nop
 	jr $31
+	nop
+	nop
+	nop
+	nop
+	nop
 
 continue_count:
+	nop
+	nop
+	nop
+	nop
+	nop
 	addi $6, $6, 1
+	nop
+	nop
+	nop
+	nop
+	nop
 	jr $31
  
 
@@ -107,12 +143,47 @@ debug_start:
 
         
 setup_loop: 
+	nop
+	nop
+	nop
+	nop
+	nop
 	addi $5, $31, 0    # Save return reg
+	nop
+	nop
+	nop
+	nop
+	nop
 	addi $20, $2, 0    # Reset current switch to sw0
+	nop
+	nop
+	nop
+	nop
+	nop
 	addi $21, $2, 13   # Reset prev_swith to sw0
+	nop
+	nop
+	nop
+	nop
+	nop
 	addi $14, $20, 9
+	nop
+	nop
+	nop
+	nop
+	nop
 	addi $15, $0, 0
+	nop
+	nop
+	nop
+	nop
+	nop
 	addi $18, $0, 8
+	nop
+	nop
+	nop
+	nop
+	nop
 
 loop:
 	nop
@@ -121,6 +192,11 @@ loop:
 	nop
 	nop
 	lw $16, 0($20)	   # Load current switch to $16 
+	nop
+	nop
+	nop
+	nop
+	nop
 	lw $17, 0($21)     # Load current prev_switch to $17
 	nop
 	nop
@@ -134,6 +210,11 @@ loop:
 	nop
 	nop
 	addi $20, $20, 1   # Increment current switch
+	nop
+	nop
+	nop
+	nop
+	nop
 	addi $21, $21, 1   # Increment current prev_switch
 	nop
 	nop
@@ -294,7 +375,7 @@ rand_loop:
 	nop
 	nop
 	nop
-	bne $0, $8, dec_ctr
+	#bne $0, $8, dec_ctr
 	nop 
 	nop
 	nop
@@ -320,13 +401,12 @@ rand_loop:
 	nop
 
 dec_ctr:
-	addi $10, $0, 1
 	nop 
 	nop
 	nop
 	nop
 	nop
-	sub $8, $8, $10
+	addi $8, $8, -1
 	nop 
 	nop
 	nop
@@ -360,13 +440,48 @@ filled_square:
 	nop
 
 inc_9:
+	nop 
+	nop
+	nop
+	nop
+	nop
 	addi $14, $0, 7
+	nop 
+	nop
+	nop
+	nop
+	nop
 	blt $14, $9, reset_9
+	nop 
+	nop
+	nop
+	nop
+	nop
 	addi $9, $9, 1
+	nop 
+	nop
+	nop
+	nop
+	nop
 	jr $31
+	nop 
+	nop
+	nop
+	nop
+	nop
 
 reset_9:
+	nop 
+	nop
+	nop
+	nop
+	nop
 	addi $9, $2, 26 
+	nop 
+	nop
+	nop
+	nop
+	nop
 	jr $31
 		
 	
